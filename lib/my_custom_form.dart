@@ -20,43 +20,33 @@ class MyCustomFormState extends State<MyCustomForm> {
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
 
-  @override
-  Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Custom Form'),
-      ),
-      body: Form(
+ @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Form Demo'),
+    ),
+    body: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Form(
         key: _formKey,
         child: Column(
           children: <Widget>[
             TextFormField(
               decoration: const InputDecoration(
-                labelText: 'Name',
+                hintText: 'Enter your text',
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your name';
+                  return 'Please enter some text';
                 }
                 return null;
               },
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Email',
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                }
-                return null;
-              },
-            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Processing Data')),
                   );
@@ -67,6 +57,8 @@ class MyCustomFormState extends State<MyCustomForm> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
